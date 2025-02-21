@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
   }
-  
+
   void _clearCurrentCalc() {
     setState(() {
       currentCalc = [];
@@ -64,6 +64,47 @@ class _MyHomePageState extends State<MyHomePage> {
         currentCalc.add(operator);
         calcDisplay = operator;
         print(currentCalc);
+      }
+    });
+  }
+
+  void _handleNum(String num){
+    setState(() {
+      if(calcDisplay == '0' || calcDisplay.contains('.')){
+        calcDisplay = num;
+      } else if(_calcDisplayContainsOperator() && currentCalc.length == 2){
+        calcDisplay = num;
+      } else {
+        calcDisplay += num;
+      }
+    });
+  }
+
+    double _calculation(){
+    if(currentCalc[1] == '+'){
+      double sum = double.parse(currentCalc[0]) + double.parse(calcDisplay);
+      return sum;
+    } else if(currentCalc[1] == '-'){
+      double difference = double.parse(currentCalc[0]) - double.parse(calcDisplay);
+      return difference;
+    } else if(currentCalc[1] == '*'){
+      double product = double.parse(currentCalc[0]) * double.parse(calcDisplay);
+      return product;
+    } else {
+      double quotient = double.parse(currentCalc[0]) / double.parse(calcDisplay);
+      return quotient;
+    }
+  }
+
+  void _handleEquals(){
+    setState(() {
+      if(_calcDisplayContainsOperator()){
+        calcDisplay = currentCalc[0];
+        currentCalc.clear();
+      } else if(currentCalc.isEmpty || calcDisplay == '0'){
+        return;
+      } else {
+        calcDisplay = _calculation().toString();
       }
     });
   }

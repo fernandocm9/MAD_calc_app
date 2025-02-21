@@ -40,6 +40,34 @@ class _MyHomePageState extends State<MyHomePage> {
   List currentCalc = [];
   String calcDisplay = '0';
 
+  bool _calcDisplayContainsOperator(){
+    if(calcDisplay.contains('+') || calcDisplay.contains('-') || calcDisplay.contains('*') || calcDisplay.contains('/')){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  void _clearCurrentCalc() {
+    setState(() {
+      currentCalc = [];
+      calcDisplay = '0';
+    });
+  }
+
+  void _handleOperator(String operator){
+    setState(() {
+      if(calcDisplay == '0' || _calcDisplayContainsOperator()){
+        return;
+      } else {
+        currentCalc.add(calcDisplay);
+        currentCalc.add(operator);
+        calcDisplay = operator;
+        print(currentCalc);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

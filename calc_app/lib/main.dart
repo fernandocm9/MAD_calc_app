@@ -120,6 +120,44 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Center(
+              child: Container(
+                height: 30,
+                width: 250,
+                color: Colors.grey,
+                child: Align(alignment: Alignment.centerRight, child: Text(calcDisplay),),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for(var num in row2) TextButton(onPressed: () => _handleNum(num), style: TextButton.styleFrom(backgroundColor: Colors.orange), child: Text(num)),
+                TextButton(onPressed: () => _handleOperator('+'), style: TextButton.styleFrom(backgroundColor: Colors.blueAccent), child: Text('+'),)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for(var num in row3) TextButton(onPressed: () => _handleNum(num), style: TextButton.styleFrom(backgroundColor: Colors.orange), child: Text(num)),
+                TextButton(onPressed: () => _handleOperator('-'), style: TextButton.styleFrom(backgroundColor: Colors.blueAccent), child: Text('-'),)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for(var num in row4) TextButton(onPressed: () => _handleNum(num), style: TextButton.styleFrom(backgroundColor: Colors.orange), child: Text(num)),
+                TextButton(onPressed: () => _handleOperator('*'), style: TextButton.styleFrom(backgroundColor: Colors.blueAccent), child: Text('*'),)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: () => _handleNum('0'), style: TextButton.styleFrom(backgroundColor: Colors.orange), child: Text('0'),),
+                TextButton(onPressed: () => _clearCurrentCalc(), style: TextButton.styleFrom(backgroundColor: Colors.red), child: Text('clear')),
+                TextButton(onPressed: () => _handleEquals(), style: TextButton.styleFrom(backgroundColor: Colors.green), child: Text('=')),
+                TextButton(onPressed: () => _handleOperator('/'), style: TextButton.styleFrom(backgroundColor: Colors.blueAccent),child: Text('/'))
+              ],
+            )
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
